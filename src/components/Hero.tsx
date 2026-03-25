@@ -7,37 +7,9 @@ export function Hero() {
   const { openQuoteModal } = useQuoteModal();
 
   const sectionRef  = useRef<HTMLElement>(null);
-  const videoRef    = useRef<HTMLVideoElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const ctaRef      = useRef<HTMLDivElement>(null);
   const subTextRef  = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-
-    if (!video) {
-      return;
-    }
-
-    const attemptPlay = () => {
-      video.muted = true;
-      video.defaultMuted = true;
-      video.playsInline = true;
-
-      void video.play().catch(() => {
-        // Mobile browsers can still reject autoplay in low-power contexts.
-      });
-    };
-
-    attemptPlay();
-    video.addEventListener('loadeddata', attemptPlay);
-    video.addEventListener('canplay', attemptPlay);
-
-    return () => {
-      video.removeEventListener('loadeddata', attemptPlay);
-      video.removeEventListener('canplay', attemptPlay);
-    };
-  }, []);
 
   useEffect(() => {
     let ctx: { revert: () => void } | undefined;
@@ -119,7 +91,6 @@ export function Hero() {
       className="hero-video-section relative w-full h-screen overflow-hidden bg-primary"
     >
       <video
-        ref={videoRef}
         className="hero-video-bg"
         src="/electric-video.mp4"
         poster="/hero-poster.jpg"

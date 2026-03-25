@@ -5,22 +5,6 @@ const SITE_NAME = company.legalName;
 const SITE_URL = company.siteUrl;
 const DEFAULT_OG_IMAGE = `${SITE_URL}${company.ogImage}`;
 
-function getRuntimeOrigin() {
-  if (typeof window !== 'undefined' && window.location.origin) {
-    return window.location.origin;
-  }
-
-  return SITE_URL;
-}
-
-function resolveAbsoluteUrl(pathOrUrl: string, origin: string) {
-  if (/^https?:\/\//i.test(pathOrUrl)) {
-    return pathOrUrl;
-  }
-
-  return new URL(pathOrUrl, origin).toString();
-}
-
 interface SEOProps {
   title: string;
   description: string;
@@ -41,9 +25,7 @@ export function SEO({
   ogImage = DEFAULT_OG_IMAGE,
   noindex = false,
 }: SEOProps) {
-  const siteOrigin = getRuntimeOrigin();
-  const fullCanonical = resolveAbsoluteUrl(canonical, siteOrigin);
-  const resolvedOgImage = resolveAbsoluteUrl(ogImage, siteOrigin);
+  const fullCanonical = `${SITE_URL}${canonical}`;
   const resolvedRobots = noindex ? 'noindex, nofollow' : robots;
 
   return (
@@ -52,8 +34,6 @@ export function SEO({
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={fullCanonical} />
-      <link rel="image_src" href={resolvedOgImage} />
-      <meta itemProp="image" content={resolvedOgImage} />
       <meta name="robots" content={resolvedRobots} />
 
       {/* Open Graph */}
@@ -62,9 +42,9 @@ export function SEO({
       <meta property="og:url" content={fullCanonical} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={resolvedOgImage} />
-      <meta property="og:image:url" content={resolvedOgImage} />
-      <meta property="og:image:secure_url" content={resolvedOgImage} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:url" content={ogImage} />
+      <meta property="og:image:secure_url" content={ogImage} />
       <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -76,7 +56,7 @@ export function SEO({
       <meta name="twitter:url" content={fullCanonical} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={resolvedOgImage} />
+      <meta name="twitter:image" content={ogImage} />
       <meta name="twitter:image:type" content="image/jpeg" />
       <meta name="twitter:image:alt" content="Banda Electric branded social share image" />
     </Helmet>

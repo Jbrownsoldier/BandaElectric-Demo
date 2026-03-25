@@ -2,11 +2,6 @@ import { Phone, ShieldCheck, Clock, ClipboardList, Award, CheckCircle2, Building
 import { Button } from '../../components/Button';
 import { company } from '../../config/company';
 
-type CommercialStat = {
- value: string;
- label: string;
-};
-
 const trustItems = [
  { icon: ShieldCheck, label: '2 Master Electricians' },
  { icon: Clock, label: 'Maintenance Contracts' },
@@ -14,7 +9,7 @@ const trustItems = [
  { icon: Award, label: '40+ Years Combined' },
 ];
 
-const stats: CommercialStat[] = [
+const stats = [
  { value: '2', label: 'Master Electricians' },
  { value: '5-Yr', label: 'Warranty' },
  { value: 'Local', label: 'Lethbridge Based' },
@@ -71,7 +66,7 @@ export function CommercialHero() {
  );
 }
 
-function CommercialHeroVisual({ stats }: { stats: CommercialStat[] }) {
+function CommercialHeroVisual({ stats }: { stats: typeof stats }) {
  const capabilities = [
  { label: 'Maintenance contracts', tag: 'Ongoing support' },
  { label: 'New build & build-to-suit', tag: 'Start to finish' },
