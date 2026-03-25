@@ -21,7 +21,7 @@ export const company = {
   warranty: 'Five-Year Warranty',
   logo: '/banda-logo.png',
   aboutImage: '/banda-about.jpg',
-  ogImage: '/banda-og.jpg',
+  ogImage: '/banda-og-share.jpg',
 } as const;
 
 export const companyLinks = {
