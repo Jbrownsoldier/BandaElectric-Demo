@@ -2,7 +2,7 @@ export const company = {
   name: 'Banda Electric',
   legalName: 'Banda Electric',
   shortName: 'Banda',
-  siteUrl: 'https://www.bandaelectric.com',
+  siteUrl: 'https://bandaelectric-website.vercel.app',
   phoneDisplay: '(403) 330-8292',
   phoneHref: '+14033308292',
   faxDisplay: '(403) 388-9644',

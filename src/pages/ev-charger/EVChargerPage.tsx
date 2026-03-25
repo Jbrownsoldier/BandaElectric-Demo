@@ -63,7 +63,7 @@ export function EVChargerPage() {
       <JsonLd schema={serviceSchema({
         name: 'Residential Electrical',
         description: 'Residential electrical services for homes, acreages, garages, shops, renovations, and upgrades across Lethbridge and Southern Alberta.',
-        url: 'https://www.bandaelectric.com/ev-charger',
+        url: 'https://bandaelectric-website.vercel.app/ev-charger',
         serviceType: 'Residential Electrical',
       })} />
       <JsonLd schema={faqPageSchema(EV_FAQS)} />
