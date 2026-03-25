@@ -13,17 +13,11 @@ export default defineConfig({
       deleteOriginalAssets: false,
       skipIfLargerOrEqual: true,
     }),
-    // Brotli compression for browsers that support it
-    compression({
-      algorithms: ['brotliCompress'],
-      exclude: [/\.(br)$/, /\.(gz)$/],
-    }),
-    // Bundle visualizer to find bloated libraries
     visualizer({
       open: false,
       filename: 'stats.html',
       gzipSize: true,
-      brotliSize: true,
+      brotliSize: false,
     }),
   ],
 
