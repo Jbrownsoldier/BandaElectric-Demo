@@ -1,25 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { ArrowRight, Phone } from 'lucide-react';
 import { useQuoteModal } from '../context/QuoteContext';
 import { company, companyLinks } from '../config/company';
 
 export function Hero() {
   const { openQuoteModal } = useQuoteModal();
-  const [useVideo, setUseVideo] = useState(true);
 
   const sectionRef  = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const ctaRef      = useRef<HTMLDivElement>(null);
   const subTextRef  = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobileViewport = window.matchMedia('(max-width: 767px)').matches;
-    const connection = navigator.connection as (Navigator['connection'] & { saveData?: boolean }) | undefined;
-    const shouldUseVideo = !(isReducedMotion || isMobileViewport || connection?.saveData);
-
-    setUseVideo(shouldUseVideo);
-  }, []);
 
   useEffect(() => {
     let ctx: { revert: () => void } | undefined;
@@ -100,25 +90,18 @@ export function Hero() {
       ref={sectionRef}
       className="hero-video-section relative w-full h-screen overflow-hidden bg-primary"
     >
-      {useVideo ? (
-        <video
-          className="hero-video-bg"
-          src="/electric-video.mp4"
-          poster="/hero-poster.png"
-          autoPlay
-          muted
-          playsInline
-          loop
-          preload="metadata"
-          aria-hidden="true"
-        />
-      ) : (
-        <div
-          className="hero-video-bg"
-          style={{ backgroundImage: "url('/hero-poster.png')" }}
-          aria-hidden="true"
-        />
-      )}
+      <video
+        className="hero-video-bg"
+        src="/electric-video.mp4"
+        poster="/hero-poster.jpg"
+        autoPlay
+        muted
+        playsInline
+        loop
+        preload="auto"
+        disablePictureInPicture
+        aria-hidden="true"
+      />
 
       <div className="hero-video-overlay" aria-hidden="true" />
       <div className="absolute inset-0 grid-pulse pointer-events-none opacity-20 md:opacity-30" />
